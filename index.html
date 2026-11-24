@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,7 +13,11 @@
       --deep-purple: #8c2cf2;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       min-height: 100vh;
@@ -43,8 +48,14 @@
       transition: opacity 0.6s ease;
     }
 
-    #splash-screen.ready { cursor: pointer; }
-    #splash-screen.hidden { opacity: 0; pointer-events: none; }
+    #splash-screen.ready {
+      cursor: pointer;
+    }
+
+    #splash-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
 
     .splash-content {
       display: flex;
@@ -52,7 +63,10 @@
       align-items: center;
     }
 
-    .dots { display: flex; gap: 14px; }
+    .dots {
+      display: flex;
+      gap: 14px;
+    }
 
     .dot {
       width: 24px;
@@ -67,11 +81,23 @@
       animation-delay: -0.16s;
     }
 
-    .dot:nth-child(3) { animation-delay: -0.32s; }
+    .dot:nth-child(3) {
+      animation-delay: -0.32s;
+    }
 
     @keyframes bounce {
-      0%, 80%, 100% { transform: scale(.75); opacity: .6; }
-      40% { transform: scale(1.05); opacity: 1; }
+
+      0%,
+      80%,
+      100% {
+        transform: scale(.75);
+        opacity: .6;
+      }
+
+      40% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
     }
 
     #enter-text {
@@ -83,8 +109,13 @@
       transition: opacity .5s ease, transform .2s ease;
     }
 
-    #splash-screen.ready #enter-text { opacity: 1; }
-    #splash-screen.ready:hover #enter-text { transform: scale(1.08); }
+    #splash-screen.ready #enter-text {
+      opacity: 1;
+    }
+
+    #splash-screen.ready:hover #enter-text {
+      transform: scale(1.08);
+    }
 
     .top-tag {
       position: fixed;
@@ -92,7 +123,7 @@
       left: 6px;
       z-index: 20;
       border: 1.5px solid var(--deep-purple);
-      background: rgba(255,255,255,.35);
+      background: rgba(255, 255, 255, .35);
       padding: 2px 8px;
       color: #222;
       font-size: 12px;
@@ -118,11 +149,38 @@
       object-fit: contain;
     }
 
-    .sticker-top-left { top: -60px; left: 15px; width: 115px; height: 75px; }
-    .sticker-top-right { top: -77px; right: 30px; width: 90px; height: 95px; }
-    .sticker-bottom-left { bottom: -128px; left: 0; width: 70px; height: 140px; }
-    .sticker-bottom-left img { object-fit: cover; }
-    .sticker-bottom-right { bottom: 8px; right: 52px; width: 85px; height: 78px; z-index: 16; }
+    .sticker-top-left {
+      top: -60px;
+      left: 15px;
+      width: 115px;
+      height: 75px;
+    }
+
+    .sticker-top-right {
+      top: -77px;
+      right: 30px;
+      width: 90px;
+      height: 95px;
+    }
+
+    .sticker-bottom-left {
+      bottom: -128px;
+      left: 0;
+      width: 70px;
+      height: 140px;
+    }
+
+    .sticker-bottom-left img {
+      object-fit: cover;
+    }
+
+    .sticker-bottom-right {
+      bottom: 8px;
+      right: 52px;
+      width: 85px;
+      height: 78px;
+      z-index: 16;
+    }
 
     .main-card {
       position: relative;
@@ -130,9 +188,9 @@
       grid-template-columns: 1.05fr 1.3fr 1.25fr;
       gap: 20px;
       border-radius: 18px;
-      background: rgba(255,245,250,.85);
+      background: rgba(255, 245, 250, .85);
       backdrop-filter: blur(6px);
-      box-shadow: 0 8px 30px rgba(180,100,140,.12);
+      box-shadow: 0 8px 30px rgba(180, 100, 140, .12);
       padding: 28px 46px 26px 32px;
     }
 
@@ -156,7 +214,10 @@
       white-space: nowrap;
     }
 
-    .col-profile { display: flex; flex-direction: column; }
+    .col-profile {
+      display: flex;
+      flex-direction: column;
+    }
 
     .profile-header {
       display: flex;
@@ -177,14 +238,24 @@
       font-size: 18px;
     }
 
-    .pfp-box img, .album-art img, .track-thumb img {
+    .pfp-box img,
+    .album-art img,
+    .track-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .name-block h1 { font-size: 22px; letter-spacing: .5px; }
-    .name-block span { color: #333; font-size: 13px; font-style: italic; }
+    .name-block h1 {
+      font-size: 22px;
+      letter-spacing: .5px;
+    }
+
+    .name-block span {
+      color: #333;
+      font-size: 13px;
+      font-style: italic;
+    }
 
     .bio-text {
       margin-top: 6px;
@@ -200,8 +271,10 @@
       padding-left: 18px;
     }
 
-    .v-divider::before, .v-divider::after,
-    .h-divider::before, .h-divider::after {
+    .v-divider::before,
+    .v-divider::after,
+    .h-divider::before,
+    .h-divider::after {
       content: "";
       position: absolute;
       width: 7px;
@@ -211,13 +284,37 @@
       transform: rotate(45deg);
     }
 
-    .v-divider::before { left: -4.5px; top: -4px; }
-    .v-divider::after { left: -4.5px; bottom: -4px; }
-    .h-divider { position: relative; border-top: 2px solid var(--purple); margin: 14px 0; }
-    .h-divider::before { left: -4px; top: -4.5px; }
-    .h-divider::after { right: -4px; top: -4.5px; }
+    .v-divider::before {
+      left: -4.5px;
+      top: -4px;
+    }
 
-    .section-title { margin-bottom: 10px; font-size: 17px; font-weight: 500; }
+    .v-divider::after {
+      left: -4.5px;
+      bottom: -4px;
+    }
+
+    .h-divider {
+      position: relative;
+      border-top: 2px solid var(--purple);
+      margin: 14px 0;
+    }
+
+    .h-divider::before {
+      left: -4px;
+      top: -4.5px;
+    }
+
+    .h-divider::after {
+      right: -4px;
+      top: -4.5px;
+    }
+
+    .section-title {
+      margin-bottom: 10px;
+      font-size: 17px;
+      font-weight: 500;
+    }
 
     .socials-grid {
       display: grid;
@@ -227,14 +324,40 @@
       font-size: 15px;
     }
 
-    .socials-grid a { color: #111; text-decoration: none; }
-    .socials-grid a:hover { color: var(--purple); text-decoration: underline; }
+    .socials-grid a {
+      color: #111;
+      text-decoration: none;
+    }
 
-    .friends-container { display: grid; grid-template-columns: 1fr 1fr; margin-top: 6px; }
-    .friends-list { list-style: none; padding-left: 8px; font-size: 15px; line-height: 1.45; }
-    .friends-list.right-col { border-left: 2px solid var(--purple); padding-left: 14px; }
+    .socials-grid a:hover {
+      color: var(--purple);
+      text-decoration: underline;
+    }
 
-    .now-playing { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
+    .friends-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 6px;
+    }
+
+    .friends-list {
+      list-style: none;
+      padding-left: 8px;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .friends-list.right-col {
+      border-left: 2px solid var(--purple);
+      padding-left: 14px;
+    }
+
+    .now-playing {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+    }
 
     .album-art {
       width: 68px;
@@ -247,12 +370,40 @@
       font-size: 13px;
     }
 
-    .song-meta h3 { font-size: 16px; }
-    .song-meta p { margin-top: 2px; color: #333; font-size: 12px; }
-    .progress-wrap { margin: 14px 10px 8px 0; }
-    #progress-bar { width: 100%; height: 2px; accent-color: var(--purple); cursor: pointer; }
-    .controls-row { display: flex; justify-content: center; margin-bottom: 6px; }
-    .player-status { min-height: 1.2em; margin-top: 4px; color: #8c2cf2; font-size: 11px; text-align: center; }
+    .song-meta h3 {
+      font-size: 16px;
+    }
+
+    .song-meta p {
+      margin-top: 2px;
+      color: #333;
+      font-size: 12px;
+    }
+
+    .progress-wrap {
+      margin: 14px 10px 8px 0;
+    }
+
+    #progress-bar {
+      width: 100%;
+      height: 2px;
+      accent-color: var(--purple);
+      cursor: pointer;
+    }
+
+    .controls-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 6px;
+    }
+
+    .player-status {
+      min-height: 1.2em;
+      margin-top: 4px;
+      color: #8c2cf2;
+      font-size: 11px;
+      text-align: center;
+    }
 
     #play-btn {
       width: 30px;
@@ -267,28 +418,83 @@
       font-size: 12px;
     }
 
-    #play-btn:hover { background: #5c6bc0; color: #fff; }
-    .playlist { max-width: 175px; margin-top: 6px; display: flex; flex-direction: column; gap: 7px; }
-    .track-item { display: flex; align-items: center; gap: 8px; padding: 2px; border-radius: 4px; cursor: pointer; }
-    .track-item:hover, .track-item.active { background: rgba(122,115,232,.15); }
-    .track-thumb { width: 32px; height: 22px; flex-shrink: 0; background: #d3d7de; overflow: hidden; }
-    .track-info { line-height: 1.05; }
-    .track-info .t-title { font-size: 13px; }
-    .track-info .t-artist { color: #333; font-size: 11px; }
+    #play-btn:hover {
+      background: #5c6bc0;
+      color: #fff;
+    }
+
+    .playlist {
+      max-width: 175px;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .track-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 2px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .track-item:hover,
+    .track-item.active {
+      background: rgba(122, 115, 232, .15);
+    }
+
+    .track-thumb {
+      width: 32px;
+      height: 22px;
+      flex-shrink: 0;
+      background: #d3d7de;
+      overflow: hidden;
+    }
+
+    .track-info {
+      line-height: 1.05;
+    }
+
+    .track-info .t-title {
+      font-size: 13px;
+    }
+
+    .track-info .t-artist {
+      color: #333;
+      font-size: 11px;
+    }
 
     @media (max-width: 780px) {
-      body { align-items: flex-start; overflow-y: auto; padding: 60px 10px; }
-      .main-card { grid-template-columns: 1fr; padding: 28px 24px; }
+      body {
+        align-items: flex-start;
+        overflow-y: auto;
+        padding: 60px 10px;
+      }
+
+      .main-card {
+        grid-template-columns: 1fr;
+        padding: 28px 24px;
+      }
+
       .v-divider {
         border-left: 0;
         border-top: 2px solid var(--purple);
         padding-left: 0;
         padding-top: 18px;
       }
-      .v-divider::before, .v-divider::after, .sticker, .credits { display: none; }
+
+      .v-divider::before,
+      .v-divider::after,
+      .sticker,
+      .credits {
+        display: none;
+      }
     }
   </style>
 </head>
+
 <body>
   <canvas id="starfield"></canvas>
 
@@ -332,11 +538,10 @@
           </div>
         </div>
         <p class="bio-text">
-          abt u n stuff<br />
-          blah blah<br />
-          blah blah<br />
-          blah blah<br />
-          or wtv u want
+          Terrible Voice Actor<br />
+          im a chud<br />
+          spread the love!<br />
+          i love my girlfriend so much!!
         </p>
       </section>
 
@@ -344,7 +549,7 @@
         <h2 class="section-title">socials</h2>
         <div class="socials-grid">
           <a href="#">tiktok</a><a href="#">@uruser</a>
-          <a href="#">discord</a><a href="#">@uruser</a>
+          <a href="#">discord</a><a href="#">@eye4neye</a>
           <a href="#">youtube</a><a href="#">@uruser</a>
           <a href="#">twitter</a><a href="#">@uruser</a>
         </div>
@@ -352,10 +557,18 @@
         <h2 class="section-title">friends &lt;3</h2>
         <div class="friends-container">
           <ul class="friends-list">
-            <li>friend 1</li><li>friend 1</li><li>friend 1</li><li>friend 1</li><li>friend 1</li>
+            <li>friend 1</li>
+            <li>friend 1</li>
+            <li>friend 1</li>
+            <li>friend 1</li>
+            <li>friend 1</li>
           </ul>
           <ul class="friends-list right-col">
-            <li>friend 1</li><li>friend 1</li><li>friend 1</li><li>friend 1</li><li>friend 1</li>
+            <li>friend 1</li>
+            <li>friend 1</li>
+            <li>friend 1</li>
+            <li>friend 1</li>
+            <li>friend 1</li>
           </ul>
         </div>
       </section>
@@ -560,4 +773,5 @@
     loadTrack(0);
   </script>
 </body>
+
 </html>
