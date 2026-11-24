@@ -252,6 +252,7 @@
     .progress-wrap { margin: 14px 10px 8px 0; }
     #progress-bar { width: 100%; height: 2px; accent-color: var(--purple); cursor: pointer; }
     .controls-row { display: flex; justify-content: center; margin-bottom: 6px; }
+    .player-status { min-height: 1.2em; margin-top: 4px; color: #8c2cf2; font-size: 11px; text-align: center; }
 
     #play-btn {
       width: 30px;
@@ -302,7 +303,7 @@
     </div>
   </div>
 
-  <a class="top-tag" href="#">@ur user of any social or wtv</a>
+  <a class="top-tag" href="#">@EYE4</a>
 
   <main class="card-wrapper">
     <div class="sticker sticker-top-left">
@@ -376,8 +377,9 @@
         <div class="controls-row">
           <button id="play-btn" type="button" aria-label="Play">▶</button>
         </div>
+        <p id="player-status" class="player-status" aria-live="polite"></p>
         <div id="playlist-container" class="playlist"></div>
-        <audio id="audio-player"></audio>
+        <audio id="audio-player" preload="metadata"></audio>
       </section>
     </section>
   </main>
@@ -461,10 +463,8 @@
     animateStars();
 
     const tracks = [
-      { title: "The World Looks Red", artist: "Heaven Pierce Her", src: "", cover: "imgs/theworld.jpeg" },
-      { title: "Old Habits Die Hard", artist: "pyrite / autumn", src: "", cover: "imgs/old habits.jpeg" },
-      { title: "song name", artist: "artist", src: "", cover: "" },
-      { title: "song name", artist: "artist", src: "", cover: "" }
+      { title: "The World Looks Red", artist: "Heaven Pierce Her", src: "music/the%20world.mp3", cover: "imgs/theworld.jpeg" },
+      { title: "Old Habits Die Hard", artist: "pyrite / autumn", src: "music/old%20habits.mp3", cover: "imgs/old habits.jpeg" }
     ];
 
     const audio = document.getElementById("audio-player");
@@ -474,6 +474,7 @@
     const currentArtist = document.getElementById("current-artist");
     const currentCover = document.getElementById("current-cover");
     const playlistContainer = document.getElementById("playlist-container");
+    const playerStatus = document.getElementById("player-status");
     let currentIndex = 0;
 
     function setPlayingState(isPlaying) {
@@ -482,6 +483,7 @@
     }
 
     function loadTrack(index) {
+      audio.pause();
       currentIndex = index;
       const track = tracks[index];
       currentTitle.textContent = track.title;
@@ -490,10 +492,22 @@
         ? `<img src="${track.cover}" alt="${track.title} cover" />`
         : "song img";
       audio.src = track.src;
+      audio.load();
       progressBar.value = 0;
+      playerStatus.textContent = "";
       setPlayingState(false);
       document.querySelectorAll(".track-item").forEach((item, itemIndex) => {
         item.classList.toggle("active", itemIndex === index);
+      });
+    }
+
+    function playCurrentTrack() {
+      playerStatus.textContent = "";
+      audio.play().catch((error) => {
+        setPlayingState(false);
+        playerStatus.textContent = error.name === "NotAllowedError"
+          ? "Playback was blocked by the browser."
+          : "Unable to play this MP3. Check that the file is available.";
       });
     }
 
@@ -509,20 +523,27 @@
 
       item.addEventListener("click", () => {
         loadTrack(index);
-        if (track.src) audio.play().catch(() => setPlayingState(false));
+        playCurrentTrack();
       });
       playlistContainer.appendChild(item);
     });
 
     playBtn.addEventListener("click", () => {
       if (!tracks[currentIndex].src) return;
-      if (audio.paused) audio.play().catch(() => setPlayingState(false));
+      if (audio.paused) playCurrentTrack();
       else audio.pause();
     });
 
     audio.addEventListener("play", () => setPlayingState(true));
     audio.addEventListener("pause", () => setPlayingState(false));
     audio.addEventListener("ended", () => setPlayingState(false));
+    audio.addEventListener("canplay", () => {
+      playerStatus.textContent = "";
+    });
+    audio.addEventListener("error", () => {
+      setPlayingState(false);
+      playerStatus.textContent = "Unable to load this MP3. Check that the music file is available.";
+    });
 
     audio.addEventListener("timeupdate", () => {
       if (Number.isFinite(audio.duration) && audio.duration > 0) {
