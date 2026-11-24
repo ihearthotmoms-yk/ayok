@@ -42,39 +42,6 @@
       z-index: 1;
     }
 
-    /* ================= 1ST SCREEN: "click click!!!" ================= */
-    #splash-screen {
-      position: fixed;
-      inset: 0;
-      background-color: var(--bg-pink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      cursor: pointer;
-      user-select: none;
-      transition: opacity 0.65s ease, visibility 0.65s ease;
-    }
-
-    #splash-screen.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .splash-text {
-      color: #ffffff;
-      font-size: 1.55rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      animation: floatPulse 2s infinite ease-in-out;
-    }
-
-    @keyframes floatPulse {
-      0%, 100% { transform: scale(1); opacity: 0.92; }
-      50% { transform: scale(1.04); opacity: 1; }
-    }
-
     /* ================= TOP LEFT HANDLE ================= */
     .top-handle {
       position: fixed;
@@ -86,7 +53,7 @@
       z-index: 10;
     }
 
-    /* ================= 2ND SCREEN: MAIN WINDOW CARD ================= */
+    /* ================= MAIN WINDOW CARD ================= */
     .card-wrapper {
       position: relative;
       width: 92%;
@@ -426,15 +393,10 @@
   <!-- FLOATING WHITE SPARKLE PARTICLES -->
   <canvas id="sparkle-canvas"></canvas>
 
-  <!-- 1ST SCREEN: CLICK CLICK!!! -->
-  <div id="splash-screen" onclick="enterSite()">
-    <p class="splash-text">click click!!!</p>
-  </div>
-
   <!-- TOP LEFT HANDLE -->
   <div class="top-handle">@ur user of any social or wtv</div>
 
-  <!-- 2ND SCREEN: MAIN CARD -->
+  <!-- MAIN WINDOW CARD -->
   <main class="card-wrapper">
     <!-- Decorative Stickers (Uncomment & add your own PNG filenames) -->
     <!-- <img src="sticker1.png" alt="" class="sticker sticker-top-left"> -->
@@ -442,3 +404,35 @@
     <!-- <img src="sticker3.png" alt="" class="sticker sticker-bottom-left"> -->
     <!-- <img src="sticker4.png" alt="" class="sticker sticker-bottom-right"> -->
 
+    <div class="window-card">
+      <div class="window-controls">
+        <span>-</span>
+        <span>□</span>
+        <span>X</span>
+      </div>
+
+      <!-- LEFT COLUMN: PFP + BIO -->
+      <section>
+        <div class="profile-header">
+          <img src="https://placeholder.com" alt="Profile Picture" class="pfp">
+          <div class="profile-name">
+            <h1>EYE4</h1>
+            <span>she/her</span>
+          </div>
+        </div>
+        <div class="bio-text">
+          abt u n stuff<br>
+          blah blah<br>
+          blah blah<br>
+          blah blah<br>
+          or wtv u want
+        </div>
+      </section>
+
+      <!-- MIDDLE COLUMN: SOCIALS & FRIENDS -->
+      <section class="v-divider col-middle">
+        <div>
+          <h2 class="section-title">socials</h2>
+          <ul class="link-list">
+            <li><a href="#" target="_blank">Instagram</a></li>
+            <li><a href="#" target="_blank">TikTok</a></li>
