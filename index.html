@@ -9,19 +9,14 @@
       --pink: #fccce4;
       --purple: #7a73e8;
       --deep-purple: #8c2cf2;
-      --ink: #111;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       min-height: 100vh;
       background: var(--pink);
-      color: var(--ink);
+      color: #111;
       font-family: "Trebuchet MS", "Segoe UI", sans-serif;
       display: flex;
       align-items: center;
@@ -47,26 +42,16 @@
       transition: opacity 0.6s ease;
     }
 
-    #splash-screen.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
+    #splash-screen.ready { cursor: pointer; }
+    #splash-screen.hidden { opacity: 0; pointer-events: none; }
 
-    .splash-box {
-      position: relative;
-      width: min(380px, calc(100vw - 32px));
-      height: min(380px, calc(100vw - 32px));
-      border: 2px solid var(--deep-purple);
+    .splash-content {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
 
-    .dots {
-      display: flex;
-      gap: 14px;
-    }
+    .dots { display: flex; gap: 14px; }
 
     .dot {
       width: 24px;
@@ -81,37 +66,24 @@
       animation-delay: -0.16s;
     }
 
-    .dot:nth-child(3) {
-      animation-delay: -0.32s;
-    }
+    .dot:nth-child(3) { animation-delay: -0.32s; }
 
     @keyframes bounce {
-      0%, 80%, 100% { transform: scale(0.75); opacity: 0.6; }
+      0%, 80%, 100% { transform: scale(.75); opacity: .6; }
       40% { transform: scale(1.05); opacity: 1; }
     }
 
-    #enter-btn {
-      position: absolute;
-      bottom: 115px;
-      border: 0;
-      background: none;
+    #enter-text {
+      margin-top: 28px;
       color: #fff;
       font-size: 16px;
       font-weight: bold;
-      cursor: pointer;
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease, transform 0.2s ease;
+      transition: opacity .5s ease, transform .2s ease;
     }
 
-    #enter-btn.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    #enter-btn:hover {
-      transform: scale(1.08);
-    }
+    #splash-screen.ready #enter-text { opacity: 1; }
+    #splash-screen.ready:hover #enter-text { transform: scale(1.08); }
 
     .top-tag {
       position: fixed;
@@ -119,7 +91,7 @@
       left: 6px;
       z-index: 20;
       border: 1.5px solid var(--deep-purple);
-      background: rgba(255, 255, 255, 0.35);
+      background: rgba(255,255,255,.35);
       padding: 2px 8px;
       color: #222;
       font-size: 12px;
@@ -138,7 +110,7 @@
       z-index: 15;
       border: 1.5px dashed var(--purple);
       border-radius: 6px;
-      background: rgba(255, 255, 255, 0.65);
+      background: rgba(255,255,255,.65);
       color: #555;
       display: flex;
       align-items: center;
@@ -159,9 +131,9 @@
       grid-template-columns: 1.05fr 1.3fr 1.25fr;
       gap: 20px;
       border-radius: 18px;
-      background: rgba(255, 245, 250, 0.85);
+      background: rgba(255,245,250,.85);
       backdrop-filter: blur(6px);
-      box-shadow: 0 8px 30px rgba(180, 100, 140, 0.12);
+      box-shadow: 0 8px 30px rgba(180,100,140,.12);
       padding: 28px 46px 26px 32px;
     }
 
@@ -185,10 +157,7 @@
       white-space: nowrap;
     }
 
-    .col-profile {
-      display: flex;
-      flex-direction: column;
-    }
+    .col-profile { display: flex; flex-direction: column; }
 
     .profile-header {
       display: flex;
@@ -209,24 +178,14 @@
       font-size: 18px;
     }
 
-    .pfp-box img,
-    .album-art img,
-    .track-thumb img {
+    .pfp-box img, .album-art img, .track-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .name-block h1 {
-      font-size: 22px;
-      letter-spacing: 0.5px;
-    }
-
-    .name-block span {
-      color: #333;
-      font-size: 13px;
-      font-style: italic;
-    }
+    .name-block h1 { font-size: 22px; letter-spacing: .5px; }
+    .name-block span { color: #333; font-size: 13px; font-style: italic; }
 
     .bio-text {
       margin-top: 6px;
@@ -242,10 +201,8 @@
       padding-left: 18px;
     }
 
-    .v-divider::before,
-    .v-divider::after,
-    .h-divider::before,
-    .h-divider::after {
+    .v-divider::before, .v-divider::after,
+    .h-divider::before, .h-divider::after {
       content: "";
       position: absolute;
       width: 7px;
@@ -257,21 +214,11 @@
 
     .v-divider::before { left: -4.5px; top: -4px; }
     .v-divider::after { left: -4.5px; bottom: -4px; }
-
-    .h-divider {
-      position: relative;
-      border-top: 2px solid var(--purple);
-      margin: 14px 0;
-    }
-
+    .h-divider { position: relative; border-top: 2px solid var(--purple); margin: 14px 0; }
     .h-divider::before { left: -4px; top: -4.5px; }
     .h-divider::after { right: -4px; top: -4.5px; }
 
-    .section-title {
-      margin-bottom: 10px;
-      font-size: 17px;
-      font-weight: 500;
-    }
+    .section-title { margin-bottom: 10px; font-size: 17px; font-weight: 500; }
 
     .socials-grid {
       display: grid;
@@ -281,40 +228,14 @@
       font-size: 15px;
     }
 
-    .socials-grid a {
-      color: #111;
-      text-decoration: none;
-    }
+    .socials-grid a { color: #111; text-decoration: none; }
+    .socials-grid a:hover { color: var(--purple); text-decoration: underline; }
 
-    .socials-grid a:hover {
-      color: var(--purple);
-      text-decoration: underline;
-    }
+    .friends-container { display: grid; grid-template-columns: 1fr 1fr; margin-top: 6px; }
+    .friends-list { list-style: none; padding-left: 8px; font-size: 15px; line-height: 1.45; }
+    .friends-list.right-col { border-left: 2px solid var(--purple); padding-left: 14px; }
 
-    .friends-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      margin-top: 6px;
-    }
-
-    .friends-list {
-      list-style: none;
-      padding-left: 8px;
-      font-size: 15px;
-      line-height: 1.45;
-    }
-
-    .friends-list.right-col {
-      border-left: 2px solid var(--purple);
-      padding-left: 14px;
-    }
-
-    .now-playing {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 4px;
-    }
+    .now-playing { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
 
     .album-art {
       width: 68px;
@@ -327,32 +248,11 @@
       font-size: 13px;
     }
 
-    .song-meta h3 {
-      font-size: 16px;
-    }
-
-    .song-meta p {
-      margin-top: 2px;
-      color: #333;
-      font-size: 12px;
-    }
-
-    .progress-wrap {
-      margin: 14px 0 8px;
-    }
-
-    #progress-bar {
-      width: 100%;
-      height: 2px;
-      accent-color: var(--purple);
-      cursor: pointer;
-    }
-
-    .controls-row {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 6px;
-    }
+    .song-meta h3 { font-size: 16px; }
+    .song-meta p { margin-top: 2px; color: #333; font-size: 12px; }
+    .progress-wrap { margin: 14px 10px 8px 0; }
+    #progress-bar { width: 100%; height: 2px; accent-color: var(--purple); cursor: pointer; }
+    .controls-row { display: flex; justify-content: center; margin-bottom: 6px; }
 
     #play-btn {
       width: 30px;
@@ -367,78 +267,25 @@
       font-size: 12px;
     }
 
-    #play-btn:hover {
-      background: #5c6bc0;
-      color: #fff;
-    }
-
-    .playlist {
-      max-width: 175px;
-      margin-top: 6px;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .track-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 2px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .track-item:hover,
-    .track-item.active {
-      background: rgba(122, 115, 232, 0.15);
-    }
-
-    .track-thumb {
-      width: 32px;
-      height: 22px;
-      flex-shrink: 0;
-      background: #d3d7de;
-      overflow: hidden;
-    }
-
-    .track-info {
-      line-height: 1.05;
-    }
-
-    .track-info .t-title {
-      font-size: 13px;
-    }
-
-    .track-info .t-artist {
-      color: #333;
-      font-size: 11px;
-    }
+    #play-btn:hover { background: #5c6bc0; color: #fff; }
+    .playlist { max-width: 175px; margin-top: 6px; display: flex; flex-direction: column; gap: 7px; }
+    .track-item { display: flex; align-items: center; gap: 8px; padding: 2px; border-radius: 4px; cursor: pointer; }
+    .track-item:hover, .track-item.active { background: rgba(122,115,232,.15); }
+    .track-thumb { width: 32px; height: 22px; flex-shrink: 0; background: #d3d7de; overflow: hidden; }
+    .track-info { line-height: 1.05; }
+    .track-info .t-title { font-size: 13px; }
+    .track-info .t-artist { color: #333; font-size: 11px; }
 
     @media (max-width: 780px) {
-      body {
-        align-items: flex-start;
-        overflow-y: auto;
-        padding: 60px 10px;
-      }
-
-      .main-card {
-        grid-template-columns: 1fr;
-        padding: 28px 24px;
-      }
-
+      body { align-items: flex-start; overflow-y: auto; padding: 60px 10px; }
+      .main-card { grid-template-columns: 1fr; padding: 28px 24px; }
       .v-divider {
         border-left: 0;
         border-top: 2px solid var(--purple);
         padding-left: 0;
         padding-top: 18px;
       }
-
-      .v-divider::before,
-      .v-divider::after,
-      .sticker {
-        display: none;
-      }
+      .v-divider::before, .v-divider::after, .sticker, .credits { display: none; }
     }
   </style>
 </head>
@@ -446,13 +293,13 @@
   <canvas id="starfield"></canvas>
 
   <div id="splash-screen">
-    <div class="splash-box">
+    <div class="splash-content">
       <div class="dots" aria-hidden="true">
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
       </div>
-      <button id="enter-btn" type="button">click! click!</button>
+      <span id="enter-text">click! click!</span>
     </div>
   </div>
 
@@ -465,9 +312,7 @@
     <div class="sticker sticker-bottom-right">corner sticker.png</div>
 
     <section class="main-card">
-      <div class="window-controls" aria-hidden="true">
-        <span>-</span><span>[]</span><span>X</span>
-      </div>
+      <div class="window-controls" aria-hidden="true"><span>-</span><span>[]</span><span>X</span></div>
       <div class="credits">made by @peteyandson on discord</div>
 
       <section class="col-profile">
@@ -495,24 +340,14 @@
           <a href="#">youtube</a><a href="#">@uruser</a>
           <a href="#">twitter</a><a href="#">@uruser</a>
         </div>
-
         <div class="h-divider"></div>
-
         <h2 class="section-title">friends &lt;3</h2>
         <div class="friends-container">
           <ul class="friends-list">
-            <li>friend 1</li>
-            <li>friend 1</li>
-            <li>friend 1</li>
-            <li>friend 1</li>
-            <li>friend 1</li>
+            <li>friend 1</li><li>friend 1</li><li>friend 1</li><li>friend 1</li><li>friend 1</li>
           </ul>
           <ul class="friends-list right-col">
-            <li>friend 1</li>
-            <li>friend 1</li>
-            <li>friend 1</li>
-            <li>friend 1</li>
-            <li>friend 1</li>
+            <li>friend 1</li><li>friend 1</li><li>friend 1</li><li>friend 1</li><li>friend 1</li>
           </ul>
         </div>
       </section>
@@ -526,7 +361,6 @@
             <p id="current-artist">song artist</p>
           </div>
         </div>
-
         <div class="progress-wrap">
           <input id="progress-bar" type="range" min="0" max="100" value="0" aria-label="Song progress" />
         </div>
@@ -540,15 +374,16 @@
   </main>
 
   <script>
-    const enterBtn = document.getElementById("enter-btn");
     const splashScreen = document.getElementById("splash-screen");
+    let splashReady = false;
 
     setTimeout(() => {
-      enterBtn.classList.add("visible");
+      splashReady = true;
+      splashScreen.classList.add("ready");
     }, 3000);
 
-    enterBtn.addEventListener("click", () => {
-      splashScreen.classList.add("hidden");
+    splashScreen.addEventListener("click", () => {
+      if (splashReady) splashScreen.classList.add("hidden");
     });
 
     const canvas = document.getElementById("starfield");
@@ -570,16 +405,16 @@
         x: Math.random() * width,
         y: Math.random() * height,
         radius: 14 + Math.random() * 26,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: -0.15 - Math.random() * 0.25,
+        vx: (Math.random() - .5) * .35,
+        vy: -.15 - Math.random() * .25,
         angle: Math.random() * Math.PI * 2,
-        vAngle: (Math.random() - 0.5) * 0.006,
-        alpha: 0.45 + Math.random() * 0.45
+        vAngle: (Math.random() - .5) * .006,
+        alpha: .45 + Math.random() * .45
       });
     }
 
     function drawStar(star) {
-      const innerRadius = star.radius * 0.45;
+      const innerRadius = star.radius * .45;
       ctx.save();
       ctx.translate(star.x, star.y);
       ctx.rotate(star.angle);
@@ -587,7 +422,7 @@
 
       for (let i = 0; i < 10; i++) {
         const radius = i % 2 === 0 ? star.radius : innerRadius;
-        const angle = (i * Math.PI) / 5 - Math.PI / 2;
+        const angle = i * Math.PI / 5 - Math.PI / 2;
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
         if (i === 0) ctx.moveTo(x, y);
@@ -602,26 +437,22 @@
 
     function animateStars() {
       ctx.clearRect(0, 0, width, height);
-
       for (const star of stars) {
         star.x += star.vx;
         star.y += star.vy;
         star.angle += star.vAngle;
-
         if (star.y < -50) star.y = height + 50;
         if (star.x < -50) star.x = width + 50;
         if (star.x > width + 50) star.x = -50;
-
         drawStar(star);
       }
-
       requestAnimationFrame(animateStars);
     }
 
     animateStars();
 
     const tracks = [
-      { title: "song name", artist: "song artist", src: "", cover: "" },
+      { title: "song name", artist: "artist", src: "", cover: "" },
       { title: "song name", artist: "artist", src: "", cover: "" },
       { title: "song name", artist: "artist", src: "", cover: "" },
       { title: "song name", artist: "artist", src: "", cover: "" }
@@ -652,7 +483,6 @@
       audio.src = track.src;
       progressBar.value = 0;
       setPlayingState(false);
-
       document.querySelectorAll(".track-item").forEach((item, itemIndex) => {
         item.classList.toggle("active", itemIndex === index);
       });
@@ -670,23 +500,15 @@
 
       item.addEventListener("click", () => {
         loadTrack(index);
-        if (track.src) {
-          audio.play().then(() => setPlayingState(true)).catch(() => setPlayingState(false));
-        }
+        if (track.src) audio.play().catch(() => setPlayingState(false));
       });
-
       playlistContainer.appendChild(item);
     });
 
     playBtn.addEventListener("click", () => {
       if (!tracks[currentIndex].src) return;
-
-      if (audio.paused) {
-        audio.play().then(() => setPlayingState(true)).catch(() => setPlayingState(false));
-      } else {
-        audio.pause();
-        setPlayingState(false);
-      }
+      if (audio.paused) audio.play().catch(() => setPlayingState(false));
+      else audio.pause();
     });
 
     audio.addEventListener("play", () => setPlayingState(true));
@@ -695,13 +517,13 @@
 
     audio.addEventListener("timeupdate", () => {
       if (Number.isFinite(audio.duration) && audio.duration > 0) {
-        progressBar.value = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = audio.currentTime / audio.duration * 100;
       }
     });
 
     progressBar.addEventListener("input", () => {
       if (Number.isFinite(audio.duration) && audio.duration > 0) {
-        audio.currentTime = (progressBar.value / 100) * audio.duration;
+        audio.currentTime = progressBar.value / 100 * audio.duration;
       }
     });
 
