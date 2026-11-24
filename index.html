@@ -347,6 +347,16 @@
       line-height: 1.45;
     }
 
+    .friends-list a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .friends-list a::after {
+      content: " →";
+      font-size: .8em;
+    }
+
     .friends-list.right-col {
       border-left: 2px solid var(--purple);
       padding-left: 14px;
@@ -527,7 +537,7 @@
 
     <section class="main-card">
       <div class="window-controls" aria-hidden="true"><span>-</span><span>[]</span><span>X</span></div>
-      <div class="credits">made by @peteyandson on discord</div>
+      <div class="credits">made by (phases) @peteyandson on discord</div>
 
       <section class="col-profile">
         <div class="profile-header">
@@ -566,7 +576,7 @@
           <ul class="friends-list right-col">
             <li>friend 1</li>
             <li>friend 1</li>
-            <li>friend 1</li>
+            <li><a href="https://therealphases.github.io/abtme/" target="_blank" rel="noopener noreferrer">phases</a></li>
             <li>friend 1</li>
             <li>friend 1</li>
           </ul>
