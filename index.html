@@ -3,17 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EYE4 — About Me</title>
-  <link href="https://googleapis.com" rel="stylesheet">
+  <title>EYE4 — about me</title>
   <style>
-    :root {
-      --bg-pink: #fdd3e6;
-      --card-bg: #fff5f9;
-      --accent-blue: #6e85e8;
-      --text-dark: #1e1e24;
-      --text-muted: #5a5a66;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,420 +12,464 @@
     }
 
     body {
-      font-family: 'Nunito', sans-serif;
-      background-color: var(--bg-pink);
-      color: var(--text-dark);
-      min-height: 100vh;
+      background-color: #fccce4;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      color: #111;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
-      align-items: center;
       justify-content: center;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* ================= SPARKLE PARTICLES CANVAS ================= */
-    #sparkle-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* ================= TOP LEFT HANDLE ================= */
-    .top-handle {
-      position: fixed;
-      top: 10px;
-      left: 14px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      z-index: 10;
-    }
-
-    /* ================= MAIN WINDOW CARD ================= */
-    .card-wrapper {
-      position: relative;
-      width: 92%;
-      max-width: 960px;
-      margin: 60px auto;
-      z-index: 5;
-    }
-
-    /* Decorative Stickers Around Card */
-    .sticker {
-      position: absolute;
-      pointer-events: none;
-      z-index: 6;
-      object-fit: contain;
-    }
-    .sticker-top-left {
-      top: -62px;
-      left: 8px;
-      width: 135px;
-    }
-    .sticker-top-right {
-      top: -78px;
-      right: 12px;
-      width: 110px;
-    }
-    .sticker-bottom-left {
-      bottom: -145px;
-      left: 38px;
-      width: 75px;
-    }
-    .sticker-bottom-right {
-      bottom: 24px;
-      right: 14px;
-      width: 90px;
-    }
-
-    .window-card {
-      background: var(--card-bg);
-      border-radius: 14px;
-      padding: 36px 32px 32px;
-      box-shadow: 0 12px 30px rgba(180, 110, 145, 0.18);
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1.15fr 1.15fr;
-      gap: 24px;
-      min-height: 360px;
-    }
-
-    /* Window Controls (- [] X) */
-    .window-controls {
-      position: absolute;
-      top: 10px;
-      right: 16px;
-      display: flex;
-      gap: 12px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-muted);
+      align-items: center;
       user-select: none;
     }
 
-    /* Bottom-Right Credit (Pyramid Head Corner) */
-    .credit-tag {
-      position: absolute;
-      bottom: 8px;
-      right: 14px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      opacity: 0.85;
-      z-index: 7;
+    /* ================= SPLASH / FAKE LOADING SCREEN ================= */
+    #splash-screen {
+      position: fixed;
+      inset: 0;
+      background-color: #fccce4;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.6s ease;
     }
 
-    /* Diamond-Tipped Divider Lines */
+    #splash-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .splash-box {
+      width: 380px;
+      height: 380px;
+      border: 2px solid #8c2cf2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .dots {
+      display: flex;
+      gap: 14px;
+    }
+
+    .dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #dff5eb;
+      animation: bounce 1.4s infinite ease-in-out both;
+    }
+
+    .dot:nth-child(1) { animation-delay: -0.32s; }
+    .dot:nth-child(2) { animation-delay: -0.16s; background-color: #e8e6f0; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0.75); opacity: 0.6; }
+      40% { transform: scale(1.05); opacity: 1; }
+    }
+
+    #enter-btn {
+      position: absolute;
+      bottom: 115px;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.2s ease;
+    }
+
+    #enter-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #enter-btn:hover {
+      transform: scale(1.08);
+    }
+
+    /* ================= DRIFTING BACKGROUND STARS ================= */
+    #starfield {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ================= TOP-LEFT CORNER TAG ================= */
+    .top-tag {
+      position: fixed;
+      top: 6px;
+      left: 6px;
+      z-index: 20;
+      border: 1.5px solid #8c2cf2;
+      background: rgba(255, 255, 255, 0.35);
+      padding: 2px 8px;
+      font-size: 12px;
+      color: #222;
+      text-decoration: none;
+    }
+
+    /* ================= MAIN CARD WRAPPER ================= */
+    .card-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 820px;
+      max-width: 95vw;
+    }
+
+    /* ================= DECORATIVE STICKERS AROUND CARD ================= */
+    /* Replace the placeholder divs with <img src="your-sticker.png" class="sticker ..."> */
+    .sticker {
+      position: absolute;
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    .sticker-top-left {
+      top: -68px;
+      left: 15px;
+      width: 115px;
+      height: 75px;
+    }
+
+    .sticker-top-right {
+      top: -85px;
+      right: 30px;
+      width: 90px;
+      height: 95px;
+    }
+
+    .sticker-bottom-left {
+      bottom: -95px;
+      left: 25px;
+      width: 55px;
+      height: 98px;
+    }
+
+    .sticker-bottom-right {
+      bottom: 8px;
+      right: 52px;
+      width: 85px;
+      height: 78px;
+      z-index: 16;
+    }
+
+    /* Placeholder box styling (remove once you put your own <img> tags) */
+    .sticker-placeholder {
+      border: 1.5px dashed #7a73e8;
+      background: rgba(255, 255, 255, 0.65);
+      font-size: 10px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: 6px;
+    }
+
+    /* ================= MAIN FROSTED WINDOW CARD ================= */
+    .main-card {
+      background: rgba(255, 245, 250, 0.85);
+      backdrop-filter: blur(6px);
+      border-radius: 18px;
+      padding: 28px 46px 26px 32px;
+      display: grid;
+      grid-template-columns: 1.05fr 1.3fr 1.25fr;
+      gap: 20px;
+      position: relative;
+      box-shadow: 0 8px 30px rgba(180, 100, 140, 0.12);
+    }
+
+    /* Fake window controls (- [ ] X) */
+    .window-controls {
+      position: absolute;
+      top: 10px;
+      right: 18px;
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      color: #333;
+      font-family: monospace;
+    }
+
+    /* Vertical credits on right edge */
+    .credits {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: center;
+      font-size: 10px;
+      color: #333;
+      white-space: nowrap;
+    }
+
+    /* ================= COLUMN 1: PROFILE & BIO ================= */
+    .col-profile {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .pfp-box {
+      width: 72px;
+      height: 72px;
+      background-color: #d3d7de;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.15;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .pfp-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .name-block h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .name-block span {
+      font-size: 13px;
+      font-style: italic;
+      color: #333;
+    }
+
+    .bio-text {
+      text-align: center;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 1.65;
+      margin-top: 6px;
+    }
+
+    /* ================= DIVIDERS WITH DIAMOND TIPS ================= */
     .v-divider {
       position: relative;
-      border-left: 2px solid var(--accent-blue);
-      padding-left: 24px;
+      border-left: 2px solid #7a73e8;
+      padding-left: 18px;
     }
 
     .v-divider::before,
     .v-divider::after {
       content: "";
       position: absolute;
-      left: -5px;
-      width: 8px;
-      height: 8px;
-      border: 2px solid var(--accent-blue);
-      background: var(--card-bg);
+      left: -4.5px;
+      width: 7px;
+      height: 7px;
+      border: 1.5px solid #7a73e8;
+      background: #fff5fa;
       transform: rotate(45deg);
     }
+
     .v-divider::before { top: -4px; }
     .v-divider::after { bottom: -4px; }
 
     .h-divider {
       position: relative;
-      border-top: 2px solid var(--accent-blue);
-      margin: 18px 0;
+      border-top: 2px solid #7a73e8;
+      margin: 14px 0;
     }
 
     .h-divider::before,
     .h-divider::after {
       content: "";
       position: absolute;
-      top: -5px;
-      width: 8px;
-      height: 8px;
-      border: 2px solid var(--accent-blue);
-      background: var(--card-bg);
+      top: -4.5px;
+      width: 7px;
+      height: 7px;
+      border: 1.5px solid #7a73e8;
+      background: #fff5fa;
       transform: rotate(45deg);
     }
+
     .h-divider::before { left: -4px; }
     .h-divider::after { right: -4px; }
 
-    /* ================= COLUMN 1: PROFILE & BIO ================= */
-    .profile-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 22px;
-    }
-
-    .pfp {
-      width: 78px;
-      height: 78px;
-      background: #dce3ea;
-      border-radius: 6px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .profile-name h1 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      line-height: 1.1;
-    }
-
-    .profile-name span {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .bio-text {
-      font-size: 1.15rem;
-      font-weight: 800;
-      line-height: 1.55;
-      text-align: center;
-      padding-right: 10px;
-    }
-
     /* ================= COLUMN 2: SOCIALS & FRIENDS ================= */
-    .col-middle {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
     .section-title {
-      font-size: 1.25rem;
-      font-weight: 700;
+      font-size: 17px;
+      font-weight: 500;
       margin-bottom: 10px;
     }
 
-    .link-list {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .socials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      row-gap: 6px;
+      font-size: 15px;
+      padding-left: 8px;
     }
 
-    .link-list a {
+    .socials-grid a {
+      color: #111;
       text-decoration: none;
-      color: var(--text-dark);
-      background: rgba(110, 133, 232, 0.14);
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      transition: background 0.2s, transform 0.15s;
     }
 
-    .link-list a:hover {
-      background: var(--accent-blue);
-      color: #fff;
-      transform: translateY(-2px);
+    .socials-grid a:hover {
+      color: #7a73e8;
+      text-decoration: underline;
     }
 
-    /* ================= COLUMN 3: MUSIC PLAYER ================= */
+    .friends-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 6px;
+    }
+
+    .friends-list {
+      list-style: none;
+      font-size: 15px;
+      line-height: 1.45;
+      padding-left: 8px;
+    }
+
+    .friends-list.right-col {
+      border-left: 2px solid #7a73e8;
+      padding-left: 14px;
+    }
+
+    /* ================= COLUMN 3: MUSIC & PLAYLIST ================= */
     .now-playing {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin-top: 8px;
+      gap: 12px;
+      margin-top: 4px;
     }
 
-    .song-cover {
-      width: 66px;
-      height: 66px;
-      background: #dce3ea;
-      border-radius: 6px;
-      object-fit: cover;
+    .album-art {
+      width: 68px;
+      height: 68px;
+      background-color: #d3d7de;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
       flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .album-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .song-meta h3 {
-      font-size: 1.1rem;
+      font-size: 16px;
       font-weight: 800;
     }
 
     .song-meta p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
+      font-size: 12px;
+      color: #333;
+      margin-top: 2px;
     }
 
-    .player-controls {
-      margin: 14px 0 10px;
+    /* Scrubber bar */
+    .progress-wrap {
+      margin: 14px 0 8px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 8px;
     }
 
-    .progress-bar {
+    #progress-bar {
+      -webkit-appearance: none;
       width: 100%;
-      appearance: none;
-      height: 4px;
-      background: var(--accent-blue);
-      border-radius: 4px;
+      height: 2px;
+      background: #7a73e8;
       outline: none;
       cursor: pointer;
     }
 
-    .progress-bar::-webkit-slider-thumb {
-      appearance: none;
-      width: 16px;
-      height: 16px;
+    #progress-bar::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
-      background: var(--accent-blue);
+      background: #7a73e8;
       cursor: pointer;
     }
 
-    .play-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 2.5px solid var(--accent-blue);
-      background: transparent;
-      color: var(--accent-blue);
-      font-size: 0.9rem;
-      font-weight: 800;
-      cursor: pointer;
+    .controls-row {
       display: flex;
-      align-items: center;
       justify-content: center;
-      transition: all 0.2s;
-    }
-
-    .play-btn:hover {
-      background: var(--accent-blue);
-      color: #fff;
-    }
-
-    .playlist-title {
-      font-size: 1.05rem;
-      font-weight: 700;
       margin-bottom: 6px;
     }
 
+    #play-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #5c6bc0;
+      background: transparent;
+      color: #5c6bc0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 12px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    #play-btn:hover {
+      background: #5c6bc0;
+      color: #fff;
+    }
+
+    /* Playlist items */
     .playlist {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      max-width: 72%;
+      gap: 7px;
+      margin-top: 6px;
+      max-width: 175px; /* Leaves room for bottom-right sticker */
     }
 
     .track-item {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 4px 6px;
-      border-bottom: 1.5px solid rgba(110, 133, 232, 0.45);
+      gap: 8px;
       cursor: pointer;
+      padding: 2px;
       border-radius: 4px;
       transition: background 0.15s;
     }
 
     .track-item:hover,
     .track-item.active {
-      background: rgba(110, 133, 232, 0.15);
+      background: rgba(122, 115, 232, 0.15);
     }
 
     .track-thumb {
-      width: 26px;
-      height: 26px;
-      background: #dce3ea;
-      border-radius: 3px;
-      object-fit: cover;
+      width: 32px;
+      height: 22px;
+      background: #d3d7de;
       flex-shrink: 0;
+      overflow: hidden;
     }
 
-    .track-info {
-      line-height: 1.1;
-    }
 
-    .track-info .t-name {
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-
-    .track-info .t-artist {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
-    @media (max-width: 820px) {
-      .window-card {
-        grid-template-columns: 1fr;
-        padding-bottom: 36px;
-      }
-      .v-divider {
-        border-left: none;
-        border-top: 2px solid var(--accent-blue);
-        padding-left: 0;
-        padding-top: 20px;
-      }
-      .v-divider::before, .v-divider::after { display: none; }
-      .playlist { max-width: 100%; }
-      .sticker { display: none; }
-    }
-  </style>
-</head>
-<body>
-
-  <canvas id="sparkle-canvas"></canvas>
-
-  <div class="top-handle">@ur user of any social or wtv</div>
-
-  <main class="card-wrapper">
-    <!-- Decorative Stickers (Uncomment & add your own PNG filenames) -->
-    <!-- <img src="sticker1.png" alt="" class="sticker sticker-top-left"> -->
-    <!-- <img src="sticker2.png" alt="" class="sticker sticker-top-right"> -->
-    <!-- <img src="sticker3.png" alt="" class="sticker sticker-bottom-left"> -->
-    <!-- <img src="sticker4.png" alt="" class="sticker sticker-bottom-right"> -->
-
-    <div class="window-card">
-      <div class="window-controls">
-        <span>-</span>
-        <span>□</span>
-        <span>X</span>
-      </div>
-
-      <!-- LEFT COLUMN: PFP + BIO -->
-      <section>
-        <div class="profile-header">
-          <img src="https://placeholder.com" alt="Profile Picture" class="pfp">
-          <div class="profile-name">
-            <h1>EYE4</h1>
-            <span>she/her</span>
-          </div>
-        </div>
-        <div class="bio-text">
-          abt u n stuff<br>
-          blah blah<br>
-          blah blah<br>
-          blah blah<br>
-          or wtv u want
-        </div>
-      </section>
-
-      <!-- MIDDLE COLUMN: SOCIALS & FRIENDS -->
-      <section class="v-divider col-middle">
-        <div>
-          <h2 class="section-title">socials</h2>
-          <ul class="link-list">
-            <li><a href="#" target="_blank">Instagram</a></li>
-            <li><a href="#" target="_blank">TikTok</a></li>
-            <li><a href="#" target="_blank">Discord</a></li>
-            <li><a href="#" target="_blank">Spotify</a></li>
-          </ul>
-        </div>
-
-        <div class="h-divider"></div>
-
-        <div>
